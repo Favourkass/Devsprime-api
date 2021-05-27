@@ -1,0 +1,28 @@
+version: '3.7'
+
+x-db-envs: &db-envs
+  POSTGRES_DB: devsprimedb
+  POSTGRES_PASSWORD: password
+  POSTGRES_USER: postgres
+
+x-api-vars: &api-vars
+  ALLOWED_HOSTS: 127.0.0.1,localhost
+  DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
+  DEBUG: 0
+  PORT: 18000
+  API_SECRET: $${{ secrets.API_SECRET }}
+
+services:
+  db:
+    image: postgres
+    environment:
+      <<: *db-envs
+
+  api:
+    container_name: devsprime-api
+    build: .
+    command: python project/manage.py runserver 0.0.0.0:8000 && python project/manage.py test
+    depends_on:
+      - db
+    environment:
+      <<: *api-vars
