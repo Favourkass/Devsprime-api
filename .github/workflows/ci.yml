@@ -13,14 +13,12 @@ jobs:
         run: docker-compose -f docker-compose.test.yml up -d
       - name: Await Services
         uses: jakejarvis/wait-action@master
-        with:
-          time: '10s'
       - name: Check Running containers
         run: docker ps
       - name: Show Services Logs
         run: docker-compose -f docker-compose.test.yml logs
-      - name: Show current working directory files
-        run: docker-compose exec api ls
+      # - name: Show current working directory files
+      #   run: docker-compose exec  ls
       - name: Run Migrations
         run: docker-compose exec -T api python manage.py migrate
       - name: Show Migrations Logs
