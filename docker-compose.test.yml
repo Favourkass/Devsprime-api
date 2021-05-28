@@ -10,7 +10,6 @@ x-api-vars: &api-vars
   DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
   DEBUG: 0
   PORT: 18000
-  API_SECRET: $${{ secrets.API_SECRET }}
 
 services:
   db:
@@ -19,9 +18,8 @@ services:
       <<: *db-envs
 
   api:
-    container_name: devsprime-api
     build: .
-    command: python project/manage.py runserver 0.0.0.0:8000 && python project/manage.py test
+    command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     environment:
