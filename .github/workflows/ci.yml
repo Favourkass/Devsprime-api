@@ -1,4 +1,4 @@
-name: Cinch API
+name: DevsPrime API
 
 on: [push, pull_request]
 
