@@ -1,6 +1,5 @@
 # DevsPrime API
 
-![Cinch API](https://github.com/decadevs/devsprime-api/workflows/Cinch%20API/badge.svg?branch=main)
 
 API Service backing client interfaces
 
