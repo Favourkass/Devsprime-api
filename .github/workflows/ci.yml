@@ -1,35 +1,24 @@
-name: DevsPrime API
+name: Cinch API
 
 on: [push, pull_request]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Spin up Docker Engine
+      - name: Startup Services
         run: docker-compose -f docker-compose.test.yml up -d
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: ${{ secrets.DEBUG }}
-          DBPASSWD: ${{ secrets.DBPASSWD }}
-          DBUSER: ${{ secrets.DBUSER }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      - name: Check Running containers
-        run: |
-          ls -la
-          docker ps
+      - name: Await Services
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '10s'
       - name: Show Services Logs
         run: docker-compose -f docker-compose.test.yml logs
-      - name: Show current working directory files
-        run: docker-compose exec devsprime-api_api ls
       - name: Run Migrations
-        run: docker-compose exec devsprime-api_api python manage.py migrate
-      - name: Show Migrations Logs
-        run: docker-compose -f docker-compose.test.yml logs
+        run: bin/exec migrate
       - name: Run Tests
-        run: docker-compose exec devsprime-api_api python manage test --noinput
+        run: bin/exec test --noinput
       - name: Shutdown Services
         run: docker-compose down
