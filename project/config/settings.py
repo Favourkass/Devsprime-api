@@ -3,7 +3,7 @@ import dj_database_url
 from pathlib import Path
 from decouple import config
 from django.core.management.utils import get_random_secret_key
-
+from .db import DB
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,7 +71,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {'default': dj_database_url.config(conn_max_age=60)}
+print(DEBUG)
+
+DATABASES = DB.config(DEBUG)
 
 
 # Password validation

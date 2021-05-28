@@ -11,10 +11,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Spin up Docker Engine
         run: docker-compose -f docker-compose.test.yml up -d
-      - name: Await Services
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '10s'
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          DBPASSWD: ${{ secrets.DBPASSWD }}
+          DBUSER: ${{ secrets.DBUSER }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Check Running containers
         run: |
           ls -la
@@ -24,10 +26,10 @@ jobs:
       - name: Show current working directory files
         run: docker-compose exec devsprime-api_api ls
       - name: Run Migrations
-        run: docker-compose exec -T api python manage.py migrate
+        run: docker-compose exec devsprime-api_api python manage.py migrate
       - name: Show Migrations Logs
         run: docker-compose -f docker-compose.test.yml logs
       - name: Run Tests
-        run: docker-compose exec -T api python manage test --noinput
+        run: docker-compose exec devsprime-api_api python manage test --noinput
       - name: Shutdown Services
         run: docker-compose down

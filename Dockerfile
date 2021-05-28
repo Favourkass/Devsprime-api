@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # Install requirements
-WORKDIR /app
 ADD requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
@@ -13,6 +12,7 @@ RUN pip install -r requirements.txt
 COPY Dockerfile ./.env* ./
 
 # Copy aaplication codebase
+WORKDIR /app
 COPY project .
 
 CMD tail -f /dev/null

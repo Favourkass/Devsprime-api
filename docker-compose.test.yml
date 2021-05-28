@@ -5,12 +5,6 @@ x-db-envs: &db-envs
   POSTGRES_PASSWORD: password
   POSTGRES_USER: postgres
 
-x-api-vars: &api-vars
-  ALLOWED_HOSTS: 127.0.0.1,localhost
-  DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
-  DEBUG: 0
-  PORT: 8100
-
 services:
   db:
     image: postgres:13-alpine
@@ -22,5 +16,3 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
-    environment:
-      <<: *api-vars
