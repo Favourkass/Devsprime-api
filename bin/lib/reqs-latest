@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Generating the requirements.txt file from scratch
+# Run at the root directory
+# Run on a machine with Python and Bash installed
+
+if [ -f requirements.txt ]; then
+  rm requirements.txt
+fi
+
+python -m venv venv
+
+source venv/bin/activate
+
+# New requirements for project should be added here for
+# later use before actual installation
+pip install \
+  django \
+  djangorestframework \
+  whitenoise \
+  python-decouple \
+  gunicorn \
+  psycopg2 \
+  dj_database_url
+
+pip freeze > requirements.txt
+
+deactivate
+
+rm -rf venv

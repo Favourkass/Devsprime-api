@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#  - Must be executed from the root directory
+#  - Commands through the executor assumes that
+#    api service container is up
+
+executor="docker-compose exec -T api"
+
+if [ "$1" == "reqs" ]; then
+  docker-compose down
+  bin/lib/reqs-latest
+
+elif [ "$1" == "build" ]; then
+  docker-compose down
+  docker-compose build --no-cache
+
+elif [ "$1" == "start" ]; then
+  docker-compose down
+  docker-compose up
+
+elif [ "$1" == "test" ]; then
+  $executor bin/manage test
+
+elif [ "$1" == "migrate" ]; then
+  $executor bin/migrate
+
+elif [ "$1" == "install" ]; then
+  $executor bin/install ${*:2}
+
+fi

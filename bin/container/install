@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+  pip install -r requirements.txt
+else
+  pip install $*
+fi
+
+pip freeze > requirements.txt

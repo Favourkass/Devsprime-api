@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd project
+
+python manage.py $*

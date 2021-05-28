@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bin/manage makemigrations
+
+bin/manage migrate

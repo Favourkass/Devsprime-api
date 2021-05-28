@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd project
+
+if [ "$1" == "dev" ]; then
+  # wait4ports -s 1 tcp://db:5432
+  python manage.py runserver 0.0.0.0:8000
+else
+  gunicorn --bind 0.0.0.0:$PORT config.wsgi
+fi

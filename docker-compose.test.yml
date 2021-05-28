@@ -1,10 +1,16 @@
 version: '3.7'
 
 x-db-envs: &db-envs
-  POSTGRES_DB: devsprimedb
+  POSTGRES_DB: cinchdb
   POSTGRES_PASSWORD: password
   POSTGRES_USER: postgres
 
+x-api-vars: &api-vars
+  ALLOWED_HOSTS: 127.0.0.1,localhost
+  DATABASE_URL: postgres://postgres:password@db:5432/cinchdb
+  DEBUG: 0
+  PORT: 18000
+  
 services:
   db:
     image: postgres:13-alpine
@@ -12,7 +18,11 @@ services:
       <<: *db-envs
 
   api:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    build:
+      context: .
+      target: api-prod
+    command: bin/start
     depends_on:
       - db
+    environment:
+      <<: *api-vars

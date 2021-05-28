@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 x-db-envs: &db-envs
   POSTGRES_DB: devsprimedb
@@ -11,28 +11,27 @@ x-api-vars: &api-vars
   DEBUG: 1
   SECRET_KEY: SOME_RANDOM_SET_OF_CHARACTERS_USED_AS_SECRET_KEY_#
 
-services: 
+services:
   db:
-    image: postgres
-    environment: 
+    image: postgres:13-alpine
+    environment:
       <<: *db-envs
-    volumes: 
-      -  "devsprimedb:/var/lib/postgresql/data"
-    ports: 
-      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
 
   api:
-    container_name: devsprime-api
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes: 
-      - "./project:/app"
-    env_file: 
-      - .env
-    ports: 
-      - "8100:8000"
-    depends_on: 
+    build:
+      context: .
+      target: base
+    command: bin/start dev
+    ports:
+      - 18000:8000
+    environment:
+      <<: *api-vars
+    depends_on:
       - db
-
-volumes: 
-  devsprimedb:
+    volumes:
+      - ./tmp:/devsprime/tmp
+      - ./project:/devsprime/project
+      - ./bin/container:/devsprime/bin
+      - ./requirements.txt:/devsprime/requirements.txt

@@ -1,12 +1,13 @@
 build:
   docker:
     web:
+      target: api-prod
       dockerfile: Dockerfile
 
 release:
   image: web
   command:
-    - python manage.py collectstatic --noinput && python manage.py migrate --noinput
+    - ./bin/migrate
 
 run:
-  web: gunicorn --bind 0.0.0.0:$PORT config.wsgi
+  web: ./bin/start
