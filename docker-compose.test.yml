@@ -9,11 +9,11 @@ x-api-vars: &api-vars
   ALLOWED_HOSTS: 127.0.0.1,localhost
   DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
   DEBUG: 0
-  PORT: 18000
+  PORT: 8100
 
 services:
   db:
-    image: postgres
+    image: postgres:13-alpine
     environment:
       <<: *db-envs
 
