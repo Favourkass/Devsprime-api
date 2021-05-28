@@ -16,16 +16,16 @@ jobs:
         with:
           time: '10s'
       - name: Check Running containers
-        run: docker ps -a
+        run: docker ps
       - name: Show Services Logs
         run: docker-compose -f docker-compose.test.yml logs
       - name: Show current working directory files
-        run: docker-compose exec devsprime-api_api ls
+        run: docker-compose exec api ls
       - name: Run Migrations
-        run: docker-compose exec devsprime-api_api python manage.py migrate
+        run: docker-compose exec -T api python manage.py migrate
       - name: Show Migrations Logs
         run: docker-compose -f docker-compose.test.yml logs
       - name: Run Tests
-        run: docker-compose exec devsprime-api_api python manage test --noinput
+        run: docker-compose exec -T api python manage test --noinput
       - name: Shutdown Services
         run: docker-compose down
