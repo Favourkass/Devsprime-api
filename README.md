@@ -31,7 +31,7 @@ In summary, these are the lists of commands to run in listed order, to start up 
 
 ```docker
 1. git clone https://github.com/decadevs/devsprime-api.git
-2. cd cinch-api-dev
+2. cd devsprime-api
 3. docker build .
 4. docker-compose up
 5. docker-compose exec api python project/manage.py makemigrations
