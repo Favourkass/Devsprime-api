@@ -16,9 +16,6 @@ class Response:
 
         message = 'success' if data and not errors else 'failure'
 
-        # if errors and '_others' not in errors:
-        #     errors['_others'] = []
-
         if not data and not errors:
             raise InvalidResponse('Both data and errors cannot be None')
 

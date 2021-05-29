@@ -30,7 +30,7 @@ Open up another terminal and run this command `docker-compose exec api python pr
 In summary, these are the lists of commands to run in listed order, to start up the project.
 
 ```docker
-1. git clone https://github.com/decadevs/cinch-api-dev.git
+1. git clone https://github.com/decadevs/devsprime-api.git
 2. cd cinch-api-dev
 3. docker build .
 4. docker-compose up
