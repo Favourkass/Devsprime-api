@@ -25,6 +25,10 @@ WHITENOISE_AUTOREFRESH = True
 # Application definition
 
 INSTALLED_APPS = [
+    # Local
+    'api.apps.ApiConfig',
+    'db.apps.DbConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,10 +38,6 @@ INSTALLED_APPS = [
 
     # Third Party Libraries
     'rest_framework',
-
-    # Local
-    'api.apps.ApiConfig',
-    'db.apps.DbConfig',
 
 ]
 
@@ -121,3 +121,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+AUTH_USER_MODEL = "db.User"
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'alphateamsq07@gmail.com'
+EMAIL_HOST_PASSWORD = 'alphateam'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
