@@ -39,7 +39,7 @@ class RegisterUserView(generics.GenericAPIView):
             otp = generate_key(6)
             user.otp_code = otp
 
-            EMAIL_VERFICATION_URL = 'http://localhost:18000/api/v1/auth/verify'
+            EMAIL_VERFICATION_URL = 'http://localhost:18000/api/v1/otps/verify'
             email_text = 'Thank you for registering with us \n\n Please copy the code below to verify your email'
             email_body = f'Hi {fullname}\n {email_text} \n Click on this <a href="{EMAIL_VERFICATION_URL}' \
                          f'?otp={otp}&email={email}">link</a> to verify'
