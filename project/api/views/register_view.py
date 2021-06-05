@@ -51,3 +51,4 @@ class RegisterUserView(generics.GenericAPIView):
             user.save()
 
             return Response(data=dict(fullname=fullname, email=email, otp=otp), status=status.HTTP_201_CREATED)
+        
