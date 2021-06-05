@@ -1,40 +1,31 @@
 from django.contrib.auth import authenticate
-from rest_framework import status, response
+from rest_framework import status, permissions
 from rest_framework.generics import GenericAPIView
 from rest_framework.authtoken.models import Token
+
 from db.serializers.login_serializer import LoginSerializer
+from lib.response import Response
 
 
 class LoginView(GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = LoginSerializer
 
     def post(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
+        email = request.data.get('email', '')
+        password = request.data.get('password', '')
 
-        if email == '' and password:
-            data = {'message': "failure", 'data': 'null',
-                    'errors': {'email': 'This field cannot be blank'}, }
-            return response.Response(data, status=status.HTTP_401_UNAUTHORIZED)
-        elif password == '' and email:
-            data = {'message': "failure", 'data': 'null',
-                    'errors': {'password': 'This field cannot be blank'}, }
-            return response.Response(data, status=status.HTTP_401_UNAUTHORIZED)
-        elif email == '' and password == '':
-            data = {'message': "failure", 'data': 'null',
-                    'errors': {'email': 'This field cannot be blank', 'password': 'This field cannot be blank'}, }
-            return response.Response(data, status=status.HTTP_401_UNAUTHORIZED)
+        if email is None or password is None:
+            return Response(errors={'invalid_credentials': 'Please provide both email and password'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=email, password=password)
 
-        if user:
-            serializer = self.serializer_class(user)
-            token, _ = Token.objects.get_or_create(user=user)
-            data = {'message': 'success', 'data': {
-                'token': token.key}, 'errors': 'null', }
+        if not user:
+            return Response(errors={'invalid_credentials': 'Ensure both email and password are correct'}, status=status.HTTP_400_BAD_REQUEST)
 
-            return response.Response(data, status=status.HTTP_200_OK)
+        if not user.email_verified:
+            return Response(errors={'invalid_credentials': 'Please verify your account'}, status=status.HTTP_400_BAD_REQUEST)
 
-        data = {'message': "failure", 'data': 'null',
-                'errors': 'Invalid credentials. Try again', }
-        return response.Response(data, status=status.HTTP_401_UNAUTHORIZED)
+        serializer = self.serializer_class(user)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response(data={'token': token.key}, status=status.HTTP_200_OK)
