@@ -22,19 +22,20 @@ ALLOWED_HOSTS = ['*']
 
 WHITENOISE_AUTOREFRESH = True
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
-    # Local
-    'api.apps.ApiConfig',
     'db.apps.DbConfig',
-
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Third Party Libraries
     'rest_framework',
@@ -54,6 +55,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 TEMPLATES = [
     {
@@ -124,6 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
 
 AUTH_USER_MODEL = "db.User"
+SITE_ID = 1
 
 
 # Email settings
@@ -134,11 +143,3 @@ EMAIL_HOST_PASSWORD = 'alphateam'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
-}
-

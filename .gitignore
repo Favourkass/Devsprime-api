@@ -5,6 +5,7 @@ tmp/
 .idea/
 .env
 
+
 # [Python]
 *.pyc
 venv/
@@ -13,3 +14,4 @@ __pycache__/
 # [Project]
 project/staticfiles
 project/db/migrations/
+
