@@ -1,36 +1,36 @@
 from rest_framework import generics, status
-from rest_framework.response import Response
+
 from db.models.user import User
 from db.serializers.otp_form_serializer import OTPFormSerializer
+from lib.response import Response
 
 
 class VerifyOtp(generics.GenericAPIView):
     serializer_class = OTPFormSerializer
 
     def post(self, request):
-        user = request.data
-        serializer = OTPFormSerializer(data = user)
+        data = request.data
+        otp = data.get('otp', '')
+        email = data.get('email', '')
 
-        if serializer.is_valid():
-            user_otp = serializer.data['otp']
-            user_email = serializer.data['email']
+        if otp is None or email is None:
+            return Response(errors=dict(invalid_input="Please provide both otp and email"), status=status.HTTP_400_BAD_REQUEST)
 
-            user_details = {user.email:user.otp_code for user in User.objects.all()}
-            user_model = User.objects.get(email = user_email)
-            if user_details[user_email] == user_otp:
+        get_user = User.objects.filter(email=email)
+
+        if not get_user.exists():
+            return Response(errors=dict(invalid_email = "please provide a valid registered email"), status=status.HTTP_400_BAD_REQUEST )
+        
+        user = get_user[0] 
+
+        if user.otp_code != otp:
+            return Response(errors=dict(invalid_otp = "please provide a valid otp code"), status=status.HTTP_400_BAD_REQUEST)
+        
+        user.email_verified = True
+        user.is_active = True
+        user.save()
+        
+        return Response(data={
+                "verified status":"Your account has been successfully verified"
+            }, status=status.HTTP_200_OK)
                 
-                user_model.email_verified = True
-                user_model.is_active = True
-                user_model.is_learner = True
-                user_model.save()
-
-                return Response({
-                    'message':'success',
-                    'data':'null',
-                    'errors':'null'
-                })
-                
-            return Response({'message':"verification failed"})
-            
-        message='Please input valid data'
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
