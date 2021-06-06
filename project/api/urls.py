@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from api.views.login import LoginView
 from api.views.resetpassword import PasswordReset 
 from api.views.login import LoginView
@@ -17,4 +17,6 @@ urlpatterns = [
     path('auth/login/', LoginView.as_view(), name='login'),
     path('passwords/forgot/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('passwords/reset/',PasswordReset.as_view(), name='reset-password'),
+    path('blogs/', include('blog.urls')),
+
 ]

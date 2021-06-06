@@ -29,6 +29,8 @@ WHITENOISE_AUTOREFRESH = True
 INSTALLED_APPS = [
     'db.apps.DbConfig',
     'api.apps.ApiConfig',
+    'blog.apps.BlogConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
