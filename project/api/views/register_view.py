@@ -38,6 +38,7 @@ class RegisterUserView(generics.GenericAPIView):
             user.set_password(password)
             otp = generate_key(6)
             user.otp_code = otp
+            user.is_learner = True
 
             EMAIL_VERFICATION_URL = 'http://localhost:18000/api/v1/otps/verify'
             email_text = 'Thank you for registering with us \n\n Please copy the code below to verify your email'
