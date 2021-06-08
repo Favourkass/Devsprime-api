@@ -9,6 +9,7 @@ from api.views.verify_otp import VerifyOtp
 from api.views.forgot_password import ForgotPasswordView
 from api.views.resetpassword import PasswordReset 
 from api.views.register_view import RegisterUserView
+from api.views.instructor_profile import InstructorProfile
 from .views.instructor_course import CourseList
 
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('passwords/forgot/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('passwords/reset/',PasswordReset.as_view(), name='reset-password'),
     path('learner/card/', LearnerCardView.as_view(), name='learn-card-detail'),
+    path('instructor/', InstructorProfile.as_view(), name='instructor-profile'),
     path('blogs/', include('blog.urls')),   
     path('instructors/courses/<instructor_id>/',CourseList.as_view(), name='instructor-courses'),
 ]
