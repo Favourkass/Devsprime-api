@@ -1,3 +1,4 @@
+
 from django.urls import path, include
 from api.views.login import LoginView
 from api.views.resetpassword import PasswordReset 
@@ -8,6 +9,7 @@ from api.views.verify_otp import VerifyOtp
 from api.views.forgot_password import ForgotPasswordView
 from api.views.resetpassword import PasswordReset 
 from api.views.register_view import RegisterUserView
+from .views.instructor_course import CourseList
 
 
 urlpatterns = [
@@ -17,6 +19,9 @@ urlpatterns = [
     path('auth/login/', LoginView.as_view(), name='login'),
     path('passwords/forgot/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('passwords/reset/',PasswordReset.as_view(), name='reset-password'),
+    path('instructors/courses/<instructor_id>/',CourseList.as_view(), name='instructor-courses'),
     path('blogs/', include('blog.urls')),
+    
 
 ]
+
