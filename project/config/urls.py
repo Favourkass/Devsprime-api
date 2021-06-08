@@ -19,8 +19,6 @@ from .views import index
 from rest_framework import permissions
 
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # match api index route request

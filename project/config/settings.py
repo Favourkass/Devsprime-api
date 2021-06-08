@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {'default': dj_database_url.config(conn_max_age=60)}
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -128,7 +127,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+PAYSTACK_PUBLIC_KEY = config(
+    'PAYSTACK_PUBLIC_KEY', default='sk_test_6a4efa274332fdb0c99cbb3ba313b3740e4b3465', cast=str)
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]

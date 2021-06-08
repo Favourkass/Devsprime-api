@@ -4,14 +4,15 @@
 tmp/
 .idea/
 .env
-
-
+db.sqlite3
 # [Python]
 *.pyc
 venv/
 __pycache__/
-
+.env
 # [Project]
 project/staticfiles
 project/db/migrations/
-
+project/api/migrations/
+api/migrations/
+migrations
