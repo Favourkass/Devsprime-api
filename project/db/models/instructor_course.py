@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.db.migrations.operations import base
 from django.db.models.deletion import CASCADE
 from db.models.instructors import Instructor
 
