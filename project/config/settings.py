@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third Party Libraries
+    'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -64,6 +65,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+
 
 TEMPLATES = [
     {
@@ -146,11 +158,4 @@ EMAIL_HOST_PASSWORD = 'alphateam'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
-}
 
