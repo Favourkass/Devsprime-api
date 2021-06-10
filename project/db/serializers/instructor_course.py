@@ -1,4 +1,4 @@
-from ..models.instructor_course import Course
+from db.models.course import Course
 from rest_framework import serializers
 
 

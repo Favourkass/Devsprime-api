@@ -1,10 +1,12 @@
-import _uuid
-from django.test import TestCase, client
 from django.contrib.auth import get_user_model
-from db.models.instructor_course import Course, CourseType, CourseCategory
-from db.models.instructors import Instructor
+
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
+
+from db.models.course import Course
+from db.models.course_type import CourseType
+from db.models.instructors import Instructor
+from db.models.course_category import CourseCategory
 
 
 class TestInstructorCourse(APITestCase):

@@ -1,5 +1,5 @@
 from db.serializers.instructor_course import CourseSerializer
-from db.models.instructor_course import Course
+from db.models.course import Course
 from lib.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
