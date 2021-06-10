@@ -11,9 +11,11 @@ from api.views.resetpassword import PasswordReset
 from api.views.register_view import RegisterUserView
 from api.views.instructor_profile import InstructorProfile
 from .views.instructor_course import CourseList
+from api.views.learner_profile import LearnerProfile
 
 
 urlpatterns = [
+    path('learners/', LearnerProfile.as_view(), name='learners'),
     path('auth/register/', RegisterUserView.as_view(), name='register'),
     path('auth/register/instructor', RegisterInstructorView.as_view(), name='registerinstructor'),
     path('otps/verify', VerifyOtp.as_view(), name='verify-otp'),
