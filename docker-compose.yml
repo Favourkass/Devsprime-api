@@ -10,6 +10,7 @@ x-api-vars: &api-vars
   DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
   DEBUG: 1
   SECRET_KEY: SOME_RANDOM_SET_OF_CHARACTERS_USED_AS_SECRET_KEY_#
+  BASE_URL: http://localhost:18000/api/v1
 
 services:
   db:
