@@ -12,6 +12,7 @@ from api.views.register_view import RegisterUserView
 from api.views.instructor_profile import InstructorProfile
 from .views.instructor_course import CourseList
 from api.views.learner_profile import LearnerProfile
+from api.views.all_courses import AllCourses
 
 
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     path('instructor/', InstructorProfile.as_view(), name='instructor-profile'),
     path('blogs/', include('blog.urls')),   
     path('instructors/courses/<instructor_id>/',CourseList.as_view(), name='instructor-courses'),
+    path('courses/', AllCourses.as_view(), name='all_courses'),
 ]

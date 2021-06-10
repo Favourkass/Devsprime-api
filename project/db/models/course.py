@@ -12,7 +12,7 @@ class Course(models.Model):
     avatar = models.CharField(max_length=255, blank=False)
     course_url = models.CharField(max_length=255, blank=False)
     overview = models.CharField(max_length=200, blank=False)
-    price = models.IntegerField(blank=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     instructor_id = models.ForeignKey(
         Instructor, on_delete=models.CASCADE, blank=False)
     type_id = models.ForeignKey(
