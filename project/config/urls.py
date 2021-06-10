@@ -20,6 +20,7 @@ from .views import index
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from decouple import config
 
 
 schema_view = get_schema_view(
@@ -29,6 +30,7 @@ schema_view = get_schema_view(
       description="devprime learning platform API is a platform where students can purchase and take a course online",
       contact=openapi.Contact(email="devprimes@gmail.com"),
    ),
+   url=config('BASE_URL'),
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
