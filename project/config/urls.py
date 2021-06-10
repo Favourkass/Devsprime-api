@@ -30,7 +30,7 @@ schema_view = get_schema_view(
       description="devprime learning platform API is a platform where students can purchase and take a course online",
       contact=openapi.Contact(email="devprimes@gmail.com"),
    ),
-   url=config('BASE_URL'),
+   url=config('BASE_URL', default='http://localhost:18000/api/v1'),
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
