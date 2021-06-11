@@ -1,0 +1,17 @@
+DROP TABLE django_site;
+DROP TABLE django_session;
+DROP TABLE django_migrations;
+DROP TABLE django_admin_log;
+DROP TABLE db_user_user_permissions;
+DROP TABLE db_user_groups;
+DROP TABLE db_course;
+DROP TABLE db_coursecategory;
+DROP TABLE db_coursetype;
+DROP TABLE db_learnerprofile;
+DROP TABLE db_instructor;
+DROP TABLE auth_group_permissions;
+DROP TABLE auth_permission;
+DROP TABLE auth_group;
+DROP TABLE authtoken_token;
+DROP TABLE db_user;
+DROP TABLE django_content_type;
