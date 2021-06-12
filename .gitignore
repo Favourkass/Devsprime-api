@@ -15,4 +15,3 @@ project/staticfiles
 project/db/migrations/
 project/api/migrations/
 api/migrations/
-migrations

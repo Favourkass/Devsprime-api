@@ -22,8 +22,10 @@ class ForgotPasswordView(APIView):
         email = request.data.get('email')
         try:
             user = get_user_model().objects.get(email=email)
+        
         except ObjectDoesNotExist:
             return Response({"message":"User does not exist"}, status=404)
+        
         
         OTP=generateOTP()
         user.otp_code = OTP
