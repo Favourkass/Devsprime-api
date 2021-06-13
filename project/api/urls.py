@@ -18,8 +18,8 @@ from api.views.all_courses import AllCourses
 urlpatterns = [
     path('learners/', LearnerProfile.as_view(), name='learners'),
     path('auth/register/', RegisterUserView.as_view(), name='register'),
-    path('auth/register/instructor', RegisterInstructorView.as_view(), name='registerinstructor'),
-    path('otps/verify', VerifyOtp.as_view(), name='verify-otp'),
+    path('auth/register/instructor/', RegisterInstructorView.as_view(), name='registerinstructor'),
+    path('otps/verify/', VerifyOtp.as_view(), name='verify-otp'),
     path('auth/login/', LoginView.as_view(), name='login'),
     path('passwords/forgot/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('passwords/reset/',PasswordReset.as_view(), name='reset-password'),
