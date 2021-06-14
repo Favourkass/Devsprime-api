@@ -14,6 +14,7 @@ from .views.instructor_course import CourseList
 from api.views.learner_profile import LearnerProfile
 from api.views.all_courses import AllCourses
 from api.views.upload_course import UploadCourseView
+from api.views.orders import OrderListView
 
 
 urlpatterns = [
@@ -30,4 +31,5 @@ urlpatterns = [
     path('instructors/courses/<instructor_id>/',CourseList.as_view(), name='instructor-courses'),   
     path('courses/', AllCourses.as_view(), name='all_courses'),
     path('courses/upload/', UploadCourseView.as_view(), name='upload-course'),
+    path('orders/', OrderListView.as_view(),name='order'),
 ]
