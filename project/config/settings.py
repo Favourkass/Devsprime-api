@@ -159,6 +159,8 @@ EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
+EMAIL_VERIFICATION_URL = config('EMAIL_VERIFICATION_URL', default='')
+
 cloudinary.config(
     cloud_name=config('CLOUD_NAME', default=''),
     api_key=config('API_KEY', default=''),

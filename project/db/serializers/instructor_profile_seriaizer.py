@@ -6,4 +6,4 @@ from db.models.instructors import Instructor
 class InstructorProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ['avatar', 'twitter', 'facebook', 'instagram']
+        fields = ['id','avatar', 'twitter', 'facebook', 'instagram']

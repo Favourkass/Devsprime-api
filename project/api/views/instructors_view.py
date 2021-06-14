@@ -1,6 +1,7 @@
 import random
 from decouple import config
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework import generics, status, permissions
 
@@ -45,7 +46,7 @@ class RegisterInstructorView(generics.GenericAPIView):
         user.set_password(password)
 
         # Generate Email Message
-        EMAIL_VERIFICATION_URL = config('EMAIL_VERIFICATION_URL')
+        EMAIL_VERIFICATION_URL = settings.EMAIL_VERIFICATION_URL
         email_text = f'Thank you for registering with us \n\n Please click the link below to authenticate your account'
         email_body = f'Hi {fullname}\n {email_text} \n click on this link <a href="{EMAIL_VERIFICATION_URL}/?otp={otp}&email={email}" to verify your account '
         data = {'email_body': email_body, 'to_email': [

@@ -22,7 +22,7 @@ class TestInstructorCourse(APITestCase):
         self.type = CourseType.objects.create(name='free')
         self.category = CourseCategory.objects.create(name='design')
         self.testing = Course.objects.create(
-            title='testing',description='you are awesome',avatar='dfhsdflsj',
+            title='testing',description='you are awesome',cover_img='dfhsdflsj',
             course_url='dkfjslsfl',overview='sdfhslh',price=20,
             instructor_id= self.instructor, category_id=self.category, type_id=self.type
                         )
