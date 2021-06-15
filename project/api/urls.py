@@ -10,11 +10,12 @@ from api.views.forgot_password import ForgotPasswordView
 from api.views.resetpassword import PasswordReset 
 from api.views.register_view import RegisterUserView
 from api.views.instructor_profile import InstructorProfile
-from .views.instructor_course import CourseList
+from api.views.instructor_course import CourseList
 from api.views.learner_profile import LearnerProfile
 from api.views.all_courses import AllCourses
 from api.views.upload_course import UploadCourseView
 from api.views.orders import OrderListView
+from api.views.learner_course import LearnerCourseList
 
 
 urlpatterns = [
@@ -32,4 +33,5 @@ urlpatterns = [
     path('courses/', AllCourses.as_view(), name='all_courses'),
     path('courses/upload/', UploadCourseView.as_view(), name='upload-course'),
     path('orders/', OrderListView.as_view(),name='order'),
+    path('learner/courses/', LearnerCourseList.as_view(),name='learner-course'),
 ]
