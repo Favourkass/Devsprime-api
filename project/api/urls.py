@@ -17,6 +17,8 @@ from api.views.upload_course import UploadCourseView
 from api.views.course_details import CourseDetails
 from api.views.orders import OrderListView
 from api.views.learner_course import LearnerCourseList
+from api.views.cart_list import CartItemList
+from api.views.cart_details import CartDetail
 
 
 urlpatterns = [
@@ -36,4 +38,6 @@ urlpatterns = [
     path('courses/<uuid:pk>/',CourseDetails.as_view(), name='course-details'),
     path('orders/', OrderListView.as_view(),name='order'),
     path('learner/courses/', LearnerCourseList.as_view(),name='learner-course'),
+    path('cart/', CartItemList.as_view(),name='cart'),
+    path('cart/<uuid:pk>/', CartDetail.as_view(),name='cart-detail'),
 ]

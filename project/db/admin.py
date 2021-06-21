@@ -3,7 +3,7 @@ from db.models import (user, learner, instructors,
                        course, course_type, 
                        course_category, order_status,
                        blogs, comment, contact, reply, orders
-                       ,learner_course)
+                       ,learner_course, cart)
 
 
 
@@ -21,3 +21,4 @@ admin.site.register(contact.Contact)
 admin.site.register(order_status.OrderStatus)
 admin.site.register(orders.Order)
 admin.site.register(learner_course.LearnerCourse)
+admin.site.register(cart.Cart)
