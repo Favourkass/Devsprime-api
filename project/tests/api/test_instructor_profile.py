@@ -1,9 +1,7 @@
-from django.urls import reverse
 from db.models.user import User
 from db.models.instructors import Instructor
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 from rest_framework import status
-import pdb
 
 
 class TestInstructorProfile(APITestCase):

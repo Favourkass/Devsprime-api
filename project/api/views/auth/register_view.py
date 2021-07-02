@@ -2,10 +2,9 @@ import random
 from django.contrib.auth import get_user_model
 from rest_framework import generics, permissions, status
 from db.serializers.register import RegisterSerializer
-from ..utils import Util
+from api.utils import Util
 from db.models.learner import LearnerProfile
 from lib.response import Response
-from decouple import config
 
 
 

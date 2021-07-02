@@ -1,5 +1,3 @@
-from django.http import response
-from django.test import TestCase, client
 from django.contrib.auth import get_user_model
 from db.models.course import Course
 from db.models.course_type import CourseType

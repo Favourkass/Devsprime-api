@@ -5,7 +5,7 @@ from db.models.course import Course
 from db.serializers.instructor_course import CourseSerializer
 
 
-class AllCourses(APIView):
+class Courses(APIView):
     '''Display all available courses'''
 
     serializer_class = CourseSerializer
@@ -13,5 +13,5 @@ class AllCourses(APIView):
     def get(self, request):
         courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
-        return Response(data={'courses': serializer.data}, status=status.HTTP_200_OK)
+        return Response(data={'courses': serializer.data, 'total':len(serializer.data)}, status=status.HTTP_200_OK)
         

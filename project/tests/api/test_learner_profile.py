@@ -1,6 +1,5 @@
 from django.urls import reverse
 from db.models.user import User
-from db.models.learner import LearnerProfile
 from rest_framework.test import APITestCase
 from rest_framework import status
 

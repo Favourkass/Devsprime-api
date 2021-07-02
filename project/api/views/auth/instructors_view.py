@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import generics, status, permissions
 
 from db.serializers.registerserializer import RegisterInstructorSerializer
-from ..utils import Util
+from api.utils import Util
 from db.models.instructors import Instructor
 from lib.response import Response
 
