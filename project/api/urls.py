@@ -14,6 +14,7 @@ from api.views.course.course_details import CourseDetails
 from api.views.course.upload_course import UploadCourseView
 from api.views.course.instructor_course import CourseList
 from api.views.course.learner_course import LearnerCourseList
+from api.views.course.course_video import CourseVideoList
 
 from api.views.payment.course_payment import CoursePaymentView
 from api.views.payment.payment_card_views import LearnerCardView
@@ -39,6 +40,8 @@ urlpatterns = [
     path('courses/', Courses.as_view(), name='courses'),
     path('courses/upload/', UploadCourseView.as_view(), name='upload-course'),
     path('courses/<uuid:pk>/', CourseDetails.as_view(), name='course-details'),
+    path('courses/<uuid:pk>/videos/',
+         CourseVideoList.as_view(), name='course-video'),
     path('orders/', OrderListView.as_view(), name='order'),
     path('learner/courses/', LearnerCourseList.as_view(), name='learner-course'),
     path('pay/course/', CoursePaymentView.as_view(), name='pay-course'),

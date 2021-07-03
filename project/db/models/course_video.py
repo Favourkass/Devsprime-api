@@ -10,6 +10,7 @@ class CourseVideo(models.Model):
         Course, on_delete=models.CASCADE, blank=False)
     name = models.CharField(max_length=255, blank=False)
     video_url = models.URLField(max_length=255, blank=False)
+    video_urls = models.JSONField(default=list, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

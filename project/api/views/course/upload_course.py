@@ -1,16 +1,15 @@
-from rest_framework import status, permissions
+import cloudinary.uploader
 from rest_framework.views import APIView
+from rest_framework import status, permissions
 from rest_framework.parsers import MultiPartParser, JSONParser, FormParser
 
+from api.utils import Util
+from lib.response import Response
 from db.models.course import Course
 from db.models.instructors import Instructor
 from db.models.course_video import CourseVideo
-from db.serializers.upload_course import UploadCourseSerializer
 from api.permissions.upload_course import IsInstructor
-from api.utils import Util
-from lib.response import Response
-
-import cloudinary.uploader
+from db.serializers.upload_course import UploadCourseSerializer
 
 
 class UploadCourseView(APIView):
@@ -51,22 +50,25 @@ class UploadCourseView(APIView):
                     overview, folder=f'Courses/{title}', use_filename=True, overwrite=True, unique_filename=False, resource_type="video")
 
                 # CREATE COURSE AND PERSIST INTO DATABASE
-                course = Course.objects.create(title=title, description=description, price=price, category_id=category_id, type_id=type_id, instructor_id=instructor,
+                course, created = Course.objects.update_or_create(title=title, description=description, price=price, category_id=category_id, type_id=type_id, instructor_id=instructor,
                                                cover_img=uploaded_cover_img['url'], overview=uploaded_overview['url'],
-                                            )
+                                               )
+                if not created:
+                    return Response(errors=dict(invalid='course with this name already exist'))
                 
                 course.save()
-                # Create Course Video                               
+                # Create Course Video
                 for video in videos:
-                    uploaded_video = cloudinary.uploader.upload_large(video, folder=f'Courses/{title}/courses', use_filename=True, overwrite=True, unique_filename=False, resource_type="video")
-                    
+                    uploaded_video = cloudinary.uploader.upload_large(
+                        video, folder=f'Courses/{title}/courses', use_filename=True, overwrite=True, unique_filename=False, resource_type="video")
+
                     course_video = CourseVideo.objects.create(
                         course_id=course,
                         name=uploaded_video['original_filename'],
                         video_url=uploaded_video['url']
                     )
                     course_video.save()
-    
+
                 # Response Data
                 data = {}
                 data['instructor_id'] = instructor.id

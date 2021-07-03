@@ -1,15 +1,15 @@
 from django.contrib import admin
 from db.models import (user, learner, instructors,
-                       course, course_type, 
+                       course, course_type,
                        course_category, learner_course,
-                       blogs, comment, contact, reply, 
+                       blogs, comment, contact, reply,
                        course_payment, order_status, orders,
                        course_category, order_status,
-                       blogs, comment, contact, reply, orders
-                       ,learner_course, cart)
+                       blogs, comment, course_video, contact, reply, orders, learner_course, cart)
 
 
 admin.site.register(course.Course)
+admin.site.register(course_video.CourseVideo)
 admin.site.register(course_category.CourseCategory)
 admin.site.register(course_type.CourseType)
 admin.site.register(user.User)
@@ -26,7 +26,7 @@ admin.site.register(order_status.OrderStatus)
 admin.site.register(orders.Order)
 admin.site.register(cart.Cart)
 
-@admin.register(course_payment.CoursePayment)
-class CoursePayment(admin.ModelAdmin):    
-    readonly_fields = ('paystack_id', )
 
+@admin.register(course_payment.CoursePayment)
+class CoursePayment(admin.ModelAdmin):
+    readonly_fields = ('paystack_id', )
