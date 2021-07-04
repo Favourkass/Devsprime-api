@@ -39,7 +39,7 @@ class RegisterInstructorView(generics.GenericAPIView):
         # Generate Email Message
         EMAIL_VERIFICATION_URL = settings.EMAIL_VERIFICATION_URL
         email_text = f'Thank you for registering with us \n\n Please click the link below to authenticate your account'
-        email_body = f'Hi {fullname}\n {email_text} \n click on this link <a href="{EMAIL_VERIFICATION_URL}/?otp={otp}&email={email}" to verify your account '
+        email_body = f'Hi {fullname}\n {email_text} \n click on this <a href="{EMAIL_VERIFICATION_URL}/?otp={otp}&email={email}">link</a> to verify your account '
         data = {'email_body': email_body, 'to_email': [
             email], 'email_subject': 'Verify your email using this link'}
 
