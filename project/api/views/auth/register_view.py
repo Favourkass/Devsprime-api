@@ -5,7 +5,7 @@ from db.serializers.register import RegisterSerializer
 from api.utils import Util
 from db.models.learner import LearnerProfile
 from lib.response import Response
-
+from decouple import config
 
 
 def generate_key(num_digit):
@@ -31,24 +31,32 @@ class RegisterUserView(generics.GenericAPIView):
 
         if not serializer.is_valid():
             return Response(errors=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            user = get_user_model().objects.create(fullname=fullname, email=email,
-                                                   mobile_number=mobile_number, password=password)
-            user.set_password(password)
-            otp = generate_key(6)
-            user.otp_code = otp
-            user.is_learner = True
 
-            EMAIL_VERFICATION_URL = 'http://localhost:18000/api/v1/otps/verify'
-            email_text = 'Thank you for registering with us \n\n Please copy the code below to verify your email'
-            email_body = f'Hi {fullname}\n {email_text} \n Click on this <a href="{EMAIL_VERFICATION_URL}' \
-                         f'?otp={otp}&email={email}">link</a> to verify'
-            data = {'email_body': email_body, 'to_email': [email], 'email_subject': 'Verify your email using this link'}
-            Util.send_email(data)
+        # Email message (to be remove and use standard email html template)
+        otp = generate_key(6)
+        EMAIL_VERIFICATION_URL = config('EMAIL_VERIFICATION_URL')
+        email_text = 'Thank you for registering with us \n\n Please copy the code below to verify your email'
+        email_body = f'Hi {fullname}\n {email_text} \n Click on this <a href="{EMAIL_VERIFICATION_URL}' \
+            f'?otp={otp}&email={email}">link</a> to verify'
+        data = {'email_body': email_body, 'to_email': [
+            email], 'email_subject': 'Verify your email using this link'}
 
-            learner = LearnerProfile.objects.create(user_id=user)
-            learner.save()
-            user.save()
+        # Send email
+        is_email_sent = Util.send_email(data)
+        if not is_email_sent:
+            return Response(
+                errors=dict(
+                    email_error='Email service is unavailable, please try later'),
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        user = get_user_model().objects.create(fullname=fullname, email=email,
+                                                mobile_number=mobile_number, password=password)
+        user.set_password(password)
+        user.otp_code = otp
+        user.is_learner = True
 
-            return Response(data=dict(fullname=fullname, email=email, otp=otp), status=status.HTTP_201_CREATED)
-        
+        learner = LearnerProfile.objects.create(user_id=user)
+        learner.save()
+        user.save()
+
+        return Response(data=dict(fullname=fullname, email=email, otp=otp), status=status.HTTP_201_CREATED)
