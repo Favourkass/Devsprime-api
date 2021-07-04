@@ -6,6 +6,10 @@ class CloudinaryInterface:
 
     @classmethod
     def upload_image(cls, image, folder_name=''):
+        try:
+            image.name
+        except AttributeError:
+            return False
         img = image.name.split(".")
         img_ext = img[-1]
         if img_ext not in cls.image_extensions:
