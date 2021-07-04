@@ -10,6 +10,9 @@ x-api-vars: &api-vars
   DATABASE_URL: postgres://postgres:password@db:5432/devsprimedb
   DEBUG: 0
   PORT: 18000
+  EMAIL_VERIFICATION_URL: http://localhost:18000/verify
+  EMAIL_HOST_PASSWORD: dummy123
+  EMAIL_HOST_USER: dummy@gmail.com
   
 services:
   db:
