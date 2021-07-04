@@ -34,7 +34,8 @@ class RegisterUserView(generics.GenericAPIView):
 
         # Email message (to be remove and use standard email html template)
         otp = generate_key(6)
-        EMAIL_VERIFICATION_URL = config('EMAIL_VERIFICATION_URL')
+        EMAIL_VERIFICATION_URL = config(
+            'EMAIL_VERIFICATION_URL', default='http://localhost:18000/verify/')
         email_text = 'Thank you for registering with us \n\n Please copy the code below to verify your email'
         email_body = f'Hi {fullname}\n {email_text} \n Click on this <a href="{EMAIL_VERIFICATION_URL}' \
             f'?otp={otp}&email={email}">link</a> to verify'
@@ -50,7 +51,7 @@ class RegisterUserView(generics.GenericAPIView):
                 status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
         user = get_user_model().objects.create(fullname=fullname, email=email,
-                                                mobile_number=mobile_number, password=password)
+                                               mobile_number=mobile_number, password=password)
         user.set_password(password)
         user.otp_code = otp
         user.is_learner = True
