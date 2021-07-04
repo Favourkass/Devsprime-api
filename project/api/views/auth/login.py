@@ -21,7 +21,7 @@ class LoginView(GenericAPIView):
         user = authenticate(username=email, password=password)
 
         if not user:
-            return Response(errors={'invalid_credentials': 'Ensure both email and password are correct'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(errors={'invalid_credentials': 'Ensure both email and password are correct and you have verify you account'}, status=status.HTTP_400_BAD_REQUEST)
 
         if not user.email_verified:
             return Response(errors={'invalid_credentials': 'Please verify your account'}, status=status.HTTP_400_BAD_REQUEST)
