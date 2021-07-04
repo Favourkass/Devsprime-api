@@ -8,6 +8,7 @@ from api.views.auth.instructors_view import RegisterInstructorView
 
 from api.views.profile.instructor_profile import InstructorProfile
 from api.views.profile.learner_profile import LearnerProfile
+from api.views.profile.user import User, Users
 
 from api.views.course.courses import Courses
 from api.views.course.course_details import CourseDetails
@@ -47,4 +48,7 @@ urlpatterns = [
     path('pay/course/', CoursePaymentView.as_view(), name='pay-course'),
     path('cart/', CartItemList.as_view(), name='cart'),
     path('cart/<uuid:pk>/', CartDetail.as_view(), name='cart-detail'),
+    path('user/', User.as_view(), name='user'),
+    path('users/', Users.as_view(), name='users'),
+
 ]

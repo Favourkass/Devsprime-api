@@ -18,7 +18,7 @@ class TestInstructorCourse(APITestCase):
             email = "samson@gmail.com" , password = '123456ddsbbbak!'
         )
         self.user =  get_user_model().objects.get(email='samson@gmail.com')
-        self.instructor = Instructor.objects.create(user_id=self.user, avatar='thsijsfslfhs')
+        self.instructor = Instructor.objects.create(user_id=self.user)
         self.type = CourseType.objects.create(name='free')
         self.category = CourseCategory.objects.create(name='design')
         self.testing = Course.objects.create(

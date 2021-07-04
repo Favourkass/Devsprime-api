@@ -10,8 +10,6 @@ from db.models.instructors import Instructor
 from db.models.cart import Cart
 from db.serializers.instructor_course import CourseSerializer
 
-import pdb
-
 
 class CartTest(APITestCase):
     '''create instances of instructor, course, category, type'''
@@ -26,7 +24,7 @@ class CartTest(APITestCase):
         get_user_model().objects.create(
             fullname='testinstructor', email = "testinstructor@gmail.com" , password = 'testinstructor')
         self.user =  get_user_model().objects.get(email='testinstructor@gmail.com')
-        self.instructor = Instructor.objects.create(user_id=self.user, avatar='thsijsfslfhs')
+        self.instructor = Instructor.objects.create(user_id=self.user)
         self.type = CourseType.objects.create(name='free')
         self.category = CourseCategory.objects.create(name='design')
         self.test_course = Course.objects.create(

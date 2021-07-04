@@ -32,11 +32,15 @@ class Manager(BaseUserManager):
 
 
 class User(AbstractUser):
+    DEFAULT_AVATAR = 'https://res.cloudinary.com/devsprime/image/upload/v1625394926/Icons%20and%20Logo/user_ooaqks.png'
+
     username = None
-    id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(unique=True, primary_key=True,
+                          default=uuid.uuid4, editable=False)
     fullname = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     mobile_number = models.CharField(max_length=50)
+    avatar = models.URLField(null=DEFAULT_AVATAR)
     otp_code = models.CharField(max_length=100, null=True)
     email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -51,6 +55,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-
-

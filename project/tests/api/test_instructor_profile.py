@@ -12,7 +12,6 @@ class TestInstructorProfile(APITestCase):
                             password='password1234')
         self.sample_user = User.objects.get(email='test@gmail.com')
         Instructor.objects.create(user_id=self.sample_user,
-                                      avatar='Elias.jpg',
                                       facebook='https://www.facebook.com',
                                       twitter='https://www.twitter.com',
                                       instagram='https://www.instagram.com')
@@ -26,7 +25,7 @@ class TestInstructorProfile(APITestCase):
 
     def test_update_instructor(self):
         self.client.force_authenticate(user=self.sample_user)
-        payload = {'avatar': 'Johnson.jpeg',
+        payload = {
                    'facebook': 'https://facebook.com',
                    'twitter': 'https://twitter.com',
                    'instagram': 'https://www.instagram.com'}
