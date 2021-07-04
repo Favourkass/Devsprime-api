@@ -40,7 +40,7 @@ class User(AbstractUser):
     fullname = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     mobile_number = models.CharField(max_length=50)
-    avatar = models.URLField(null=DEFAULT_AVATAR)
+    avatar = models.URLField(default=DEFAULT_AVATAR)
     otp_code = models.CharField(max_length=100, null=True)
     email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
