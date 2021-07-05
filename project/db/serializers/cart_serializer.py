@@ -12,11 +12,16 @@ class CartCourseSerializer(serializers.ModelSerializer):
         read_only=True, source='course_id.cover_img')
     instructor_name = serializers.PrimaryKeyRelatedField(
         read_only=True, source='course_id.instructor_id.user_id.fullname')
+    price = serializers.PrimaryKeyRelatedField(
+        read_only=True, source='course_id.price')
+    course_type = serializers.PrimaryKeyRelatedField(
+        read_only=True, source='course_id.type_id.name')
 
     class Meta:
         model = Cart
-        fields = ['id', 'title', 'description', 'cover_img',
+        fields = ['id', 'title', 'description', 'cover_img', 'price', 'course_type',
                   'instructor_name', 'created_at', 'updated_at']
+
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
