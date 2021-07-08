@@ -20,7 +20,8 @@ class LearnerCourseList(views.APIView):
         learncourse = LearnerCourse.objects.filter(learner_id=learner_id)
         
         courses = [
-            {
+            {   
+                'id' : course.course_id.id,
                 'title': course.course_id.title, 
                 'description': course.course_id.description,
                 'course_url': course.course_id.course_url,
