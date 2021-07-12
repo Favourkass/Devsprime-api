@@ -16,6 +16,8 @@ from api.views.course.upload_course import UploadCourseView
 from api.views.course.instructor_course import CourseList
 from api.views.course.learner_course import LearnerCourseList
 from api.views.course.course_video import CourseVideoList
+from api.views.course.course_type import CourseTypeListView
+from api.views.course.course_category import CourseCategoryListView
 
 from api.views.payment.course_payment import CoursePaymentView
 from api.views.payment.payment_card_views import LearnerCardView
@@ -50,5 +52,7 @@ urlpatterns = [
     path('cart/<uuid:pk>/', CartDetail.as_view(), name='cart-detail'),
     path('user/', User.as_view(), name='user'),
     path('users/', Users.as_view(), name='users'),
+    path('coursetypes/', CourseTypeListView.as_view(), name='course-types'),
+    path('coursecategories/', CourseCategoryListView.as_view(), name='course-categories'),
 
 ]
