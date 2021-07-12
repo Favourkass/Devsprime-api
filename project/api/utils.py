@@ -21,8 +21,8 @@ class Util:
 
     @staticmethod
     def validate_image_upload(file):
-        return True if file and file.name.split('.')[-1] in ['jpeg','jpg','png','svg'] else False
+        return True if file and file.name.split('.')[-1].lower() in ['jpeg','jpg','png','svg'] else False
 
     @staticmethod
     def validate_video_upload(file):
-        return True if file and file.name.split('.')[-1] in ['mp4','avi','flv','mov'] else False
+        return True if file and file.name.split('.')[-1].lower() in ['mp4','avi','flv','mov'] else False
