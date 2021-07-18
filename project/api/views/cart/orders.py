@@ -20,8 +20,10 @@ class OrderListView(views.APIView):
         response_data = [{"id":order.course_id.id,
                             "title":order.course_id.title,
                             "description":order.course_id.description,
+                            "instructor": order.course_id.instructor_id.user_id.fullname,
                             "cover_img":order.course_id.cover_img,
                             "category":order.course_id.category_id.name,
+                            "status": order.order_status_id.name,
                             "created_at":order.course_id.created_at,
                             "updated_at":order.course_id.updated_at
                             } for order in order_queryset
