@@ -56,6 +56,7 @@ class RegisterInstructorView(generics.GenericAPIView):
                                                fullname=fullname, mobile_number=phone, otp_code=otp, is_instructor=True)
 
         user.set_password(password)
+        user.is_instructor=True;
         user.save()
 
         create_instructor = Instructor.objects.create(user_id=user)
