@@ -12,7 +12,7 @@ from db.serializers.course_video_serializer import CourseVideoSerializer, Upload
 
 
 class CourseVideoList(views.APIView):
-    permission_classes = (permissions.IsAuthenticated, IsAuthorOrReadOnly)
+    permission_classes = (IsAuthorOrReadOnly,)
     serializer_classes = CourseVideoSerializer
     parser_classes = (MultiPartParser, JSONParser, FormParser)
 
