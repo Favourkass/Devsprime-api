@@ -1,6 +1,6 @@
 # DevsPrime API
 
-![DevsPrime API](https://devsprime.herokuapp.com)
+![DevsPrime API](https://github.com/decadevs/devsprime-api/actions/workflows/ci.yml/badge.svg?branch=main)
 
 API Service backing client interfaces
 
